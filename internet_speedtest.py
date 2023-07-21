@@ -1,3 +1,4 @@
+import streamlit
 import speedtest
 
 test = speedtest.Speedtest()

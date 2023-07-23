@@ -11,8 +11,21 @@ def calculate_bmi(weight, height):
     except ValueError:
         return None
 
-st.title('**BMI Calculator** 🏋️‍♂️')
-st.markdown("<center>Calculate your Body Mass Index (BMI)</center>", unsafe_allow_html=True)
+st.title('BMI Calculator 🏋️‍♂️')
+st.write("Calculate your Body Mass Index (BMI)")
+
+# Centering the title and header using CSS
+st.markdown(
+    """
+    <style>
+    .centered-title {
+        display: flex;
+        justify-content: center;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 # Input for weight and height in kilograms and centimeters
 col1, col2 = st.columns(2)
@@ -39,8 +52,21 @@ if st.button('Calculate BMI'):
     else:
         st.warning('Please enter valid numeric values for weight and height.')
 
+# Centering the BMI Chart header using CSS
+st.markdown(
+    """
+    <style>
+    .centered-header {
+        display: flex;
+        justify-content: center;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 # BMI Chart as a table
-st.header('**BMI Chart** 📊')
+st.header('BMI Chart 📊',  class_='centered-header')
 bmi_chart_data = {
     'BMI Category': ['Underweight', 'Normal weight', 'Overweight', 'Obese'],
     'BMI Range': ['< 18.5', '18.5 - 24.9', '25.0 - 29.9', '>= 30.0'],

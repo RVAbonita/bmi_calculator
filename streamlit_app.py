@@ -2,9 +2,14 @@ import streamlit as st
 
 # Function to calculate BMI
 def calculate_bmi(weight, height):
-    height_meters = height / 100
-    bmi = weight / (height_meters ** 2)
-    return bmi
+    try:
+        weight = float(weight)
+        height = float(height)
+        height_meters = height / 100
+        bmi = weight / (height_meters ** 2)
+        return bmi
+    except ValueError:
+        return None
 
 st.title('BMI Calculator')
 
@@ -17,17 +22,20 @@ height = st.text_input('Enter your height (cm)')
 # Calculate BMI
 if st.button('Calculate BMI'):
     bmi_result = calculate_bmi(weight, height)
-    st.write(f'Your BMI is: {bmi_result:.2f}')
+    if bmi_result is not None:
+        st.write(f'Your BMI is: {bmi_result:.2f}')
 
-    # Interpret BMI result
-    if bmi_result < 18.5:
-        st.warning('You are underweight.')
-    elif 18.5 <= bmi_result < 24.9:
-        st.success('You have a normal weight.')
-    elif 25.0 <= bmi_result < 29.9:
-        st.warning('You are overweight.')
+        # Interpret BMI result
+        if bmi_result < 18.5:
+            st.warning('You are underweight.')
+        elif 18.5 <= bmi_result < 24.9:
+            st.success('You have a normal weight.')
+        elif 25.0 <= bmi_result < 29.9:
+            st.warning('You are overweight.')
+        else:
+            st.error('You are obese.')
     else:
-        st.error('You are obese.')
+        st.warning('Please enter valid numeric values for weight and height.')
 
 # BMI Chart as a table
 st.header('BMI Chart')

@@ -1,7 +1,8 @@
 import streamlit as st
 
 # Function to convert height from feet and inches to centimeters
-def convert_to_cm(feet, inches):
+def convert_to_cm(height_str):
+    feet, inches = map(int, height_str.split("'"))
     height_cm = feet * 30.48 + inches * 2.54
     return height_cm
 
@@ -17,26 +18,31 @@ st.title('BMI Calculator')
 weight = st.number_input('Enter your weight (kg)', min_value=1.0, max_value=300.0, step=0.1)
 
 # Input for height in feet and inches
-height_feet = st.number_input('Enter your height (feet)', min_value=1, max_value=10, step=1)
-height_inches = st.number_input('Enter your height (inches)', min_value=0, max_value=11, step=1)
+height_str = st.text_input('Enter your height (e.g., 5\'5")')
 
 # Convert height to centimeters
-height_cm = convert_to_cm(height_feet, height_inches)
+if "'" in height_str and '"' in height_str:
+    height_cm = convert_to_cm(height_str)
+else:
+    height_cm = None
 
 # Calculate BMI
 if st.button('Calculate BMI'):
-    bmi_result = calculate_bmi(weight, height_cm)
-    st.write(f'Your BMI is: {bmi_result:.2f}')
+    if height_cm is not None:
+        bmi_result = calculate_bmi(weight, height_cm)
+        st.write(f'Your BMI is: {bmi_result:.2f}')
 
-    # Interpret BMI result
-    if bmi_result < 18.5:
-        st.warning('You are underweight.')
-    elif 18.5 <= bmi_result < 24.9:
-        st.success('You have a normal weight.')
-    elif 25.0 <= bmi_result < 29.9:
-        st.warning('You are overweight.')
+        # Interpret BMI result
+        if bmi_result < 18.5:
+            st.warning('You are underweight.')
+        elif 18.5 <= bmi_result < 24.9:
+            st.success('You have a normal weight.')
+        elif 25.0 <= bmi_result < 29.9:
+            st.warning('You are overweight.')
+        else:
+            st.error('You are obese.')
     else:
-        st.error('You are obese.')
+        st.warning("Please enter your height in the format 'feet'inches\", for example, 5'5\".")
 
 # BMI Chart as a table
 st.header('BMI Chart')
@@ -49,4 +55,4 @@ st.table(bmi_chart_data)
 
 # Show the footer
 st.write('---')
-st.write('Created by Your Name')
+st.write('Created by Shir')

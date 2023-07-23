@@ -28,8 +28,8 @@ def main():
     st.title("BMI Calculator 🏋️‍♂️")
     st.write("Calculate your Body Mass Index (BMI)")
 
-    weight = st.text("Enter your weight in kilograms:")
-    height = st.text("Enter your height in meters:")
+    weight = st.text_input("Enter your weight in kilograms:")
+    height = st.text_input("Enter your height in meters:")
 
     if st.button("Calculate BMI"):
         bmi = calculate_bmi(weight, height)

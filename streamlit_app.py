@@ -9,10 +9,10 @@ def calculate_bmi(weight, height):
 st.title('BMI Calculator')
 
 # Input for weight in kilograms
-weight = st.text_input('Enter your weight (kg)', min_value=1.0, max_value=300.0, step=0.1)
+weight = st.text_input('Enter your weight (kg)')
 
 # Input for height in centimeters
-height = st.text_input('Enter your height (cm)', min_value=1.0, max_value=300.0, step=0.1)
+height = st.text_input('Enter your height (cm)')
 
 # Calculate BMI
 if st.button('Calculate BMI'):

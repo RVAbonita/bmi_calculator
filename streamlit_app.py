@@ -42,7 +42,7 @@ if st.button('Calculate BMI'):
         else:
             st.error('You are obese.')
     else:
-        st.warning("Please enter your height in the format 'feet'inches\", for example, 5'5\".")
+        st.warning("Please enter your height in the format 'feet'inches\", for example, 5'5\.")
 
 # BMI Chart as a table
 st.header('BMI Chart')

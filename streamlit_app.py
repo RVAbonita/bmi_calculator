@@ -15,7 +15,7 @@ st.title('**BMI Calculator** 🏋️‍♂️')
 st.markdown("<center>Calculate your Body Mass Index (BMI)</center>", unsafe_allow_html=True)
 
 # Input for weight and height in kilograms and centimeters
-col1, col2 = st.beta_columns(2)
+col1, col2 = st.columns(2)
 with col1:
     weight = st.text_input('Enter your weight (kg)')
 with col2:

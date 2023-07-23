@@ -1,5 +1,10 @@
 import streamlit as st
 
+# Function to convert height from feet and inches to centimeters
+def convert_to_cm(feet, inches):
+    height_cm = feet * 30.48 + inches * 2.54
+    return height_cm
+
 # Function to calculate BMI
 def calculate_bmi(weight, height):
     height_meters = height / 100
@@ -11,12 +16,16 @@ st.title('BMI Calculator')
 # Input for weight in kilograms
 weight = st.number_input('Enter your weight (kg)', min_value=1.0, max_value=300.0, step=0.1)
 
-# Input for height in centimeters
-height = st.number_input('Enter your height (cm)', min_value=1.0, max_value=300.0, step=0.1)
+# Input for height in feet and inches
+height_feet = st.number_input('Enter your height (feet)', min_value=1, max_value=10, step=1)
+height_inches = st.number_input('Enter your height (inches)', min_value=0, max_value=11, step=1)
+
+# Convert height to centimeters
+height_cm = convert_to_cm(height_feet, height_inches)
 
 # Calculate BMI
 if st.button('Calculate BMI'):
-    bmi_result = calculate_bmi(weight, height)
+    bmi_result = calculate_bmi(weight, height_cm)
     st.write(f'Your BMI is: {bmi_result:.2f}')
 
     # Interpret BMI result
@@ -29,9 +38,14 @@ if st.button('Calculate BMI'):
     else:
         st.error('You are obese.')
 
-# Let's add a BMI chart for reference
+# BMI Chart as a table
 st.header('BMI Chart')
-st.image('https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/bmi-chart.jpg', use_column_width=True)
+bmi_chart_data = {
+    'BMI Category': ['Underweight', 'Normal weight', 'Overweight', 'Obese'],
+    'BMI Range': ['< 18.5', '18.5 - 24.9', '25.0 - 29.9', '>= 30.0'],
+    'Interpretation': ['You are underweight.', 'You have a normal weight.', 'You are overweight.', 'You are obese.']
+}
+st.table(bmi_chart_data)
 
 # Show the footer
 st.write('---')

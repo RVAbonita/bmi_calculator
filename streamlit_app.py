@@ -18,13 +18,14 @@ st.title('BMI Calculator')
 weight = st.number_input('Enter your weight (kg)', min_value=1.0, max_value=300.0, step=0.1)
 
 # Input for height in feet and inches
-height_str = st.text_input('Enter your height (e.g., 5\'5")')
+height_str = st.text_input('Enter your height (e.g., 5\'5)')
 
-# Convert height to centimeters
-if "'" in height_str and '"' in height_str:
-    height_cm = convert_to_cm(height_str)
-else:
-    height_cm = None
+def convert_to_cm(height_str):
+    try:
+        feet, inches = map(int, height_str.split("'"))
+        height_cm = feet * 30.48 + inches * 2.54
+        return height_cm
+    except ValueError:
 
 # Calculate BMI
 if st.button('Calculate BMI'):

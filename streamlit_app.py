@@ -1,50 +1,43 @@
 import streamlit as st
 
-
+# Function to calculate BMI
 def calculate_bmi(weight, height):
-    """
-    Calculate BMI (Body Mass Index) based on weight and height.
-    BMI = weight (kg) / (height (m) * height (m))
-    """
-    bmi = weight / (height * height)
+    height_meters = height / 100
+    bmi = weight / (height_meters ** 2)
     return bmi
 
+st.title('BMI Calculator')
 
-def bmi_category(bmi):
-    """
-    Determine the BMI category based on the calculated BMI value.
-    """
-    if bmi < 18.5:
-        return "Underweight"
-    elif 18.5 <= bmi < 24.9:
-        return "Normal weight"
-    elif 25 <= bmi < 29.9:
-        return "Overweight"
+# Input for weight in kilograms
+weight = st.text_input('Enter your weight (kg)', min_value=1.0, max_value=300.0, step=0.1)
+
+# Input for height in centimeters
+height = st.text_input('Enter your height (cm)', min_value=1.0, max_value=300.0, step=0.1)
+
+# Calculate BMI
+if st.button('Calculate BMI'):
+    bmi_result = calculate_bmi(weight, height)
+    st.write(f'Your BMI is: {bmi_result:.2f}')
+
+    # Interpret BMI result
+    if bmi_result < 18.5:
+        st.warning('You are underweight.')
+    elif 18.5 <= bmi_result < 24.9:
+        st.success('You have a normal weight.')
+    elif 25.0 <= bmi_result < 29.9:
+        st.warning('You are overweight.')
     else:
-        return "Obese"
+        st.error('You are obese.')
 
+# BMI Chart as a table
+st.header('BMI Chart')
+bmi_chart_data = {
+    'BMI Category': ['Underweight', 'Normal weight', 'Overweight', 'Obese'],
+    'BMI Range': ['< 18.5', '18.5 - 24.9', '25.0 - 29.9', '>= 30.0'],
+    'Interpretation': ['You are underweight.', 'You have a normal weight.', 'You are overweight.', 'You are obese.']
+}
+st.table(bmi_chart_data)
 
-def main():
-    st.title("BMI Calculator 🏋️‍♂️")
-    st.write("Calculate your Body Mass Index (BMI)")
-
-    weight = st.text_input("Enter your weight in kilograms:")
-    height = st.text_input("Enter your height in meters:")
-
-    if st.button("Calculate BMI"):
-        bmi = calculate_bmi(weight, height)
-        category = bmi_category(bmi)
-
-        st.write(f"\nYour BMI is: {bmi:.2f}")
-        st.write("Category:", category)
-
-        st.subheader("BMI Chart")
-        st.write("Category\tBMI Range")
-        st.write("Underweight\t< 18.5")
-        st.write("Normal weight\t18.5 - 24.9")
-        st.write("Overweight\t25 - 29.9")
-        st.write("Obese\t\t30 or greater")
-
-
-if __name__ == "__main__":
-    main()
+# Show the footer
+st.write('---')
+st.write('Created by Your Shir')

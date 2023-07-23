@@ -11,6 +11,19 @@ def calculate_bmi(weight, height):
     except ValueError:
         return None
 
+# Custom CSS to set the background color and font color
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: #000000; /* Black background */
+        color: #FFFFFF; /* White font color */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 st.title('**BMI Calculator** 🏋️‍♂️')
 
 # Input for weight and height in kilograms and centimeters

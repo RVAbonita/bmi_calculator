@@ -18,10 +18,10 @@ def calculate_bmi(weight, height):
 st.title('BMI Calculator')
 
 # Input for weight in kilograms
-weight = st.text_input('Enter your weight (kg)')
+weight = st.number_input('Enter your weight (kg)', min_value=1.0, max_value=300.0, step=None)
 
 # Input for height in feet and inches
-height_str = st.text_input('Enter your height (e.g., 5\'5)')
+height_str = st.text_input('Enter your height (e.g., 5\'5")')
 
 # Convert height to centimeters
 height_cm = convert_to_cm(height_str)
@@ -42,7 +42,7 @@ if st.button('Calculate BMI'):
         else:
             st.error('You are obese.')
     else:
-        st.warning("Please enter your height in the format 'feet'inches\", for example, 5'5\.")
+        st.warning("Please enter your height in the format 'feet'inches\", for example, 5'5\".")
 
 # BMI Chart as a table
 st.header('BMI Chart')

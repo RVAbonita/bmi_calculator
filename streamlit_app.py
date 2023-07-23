@@ -42,4 +42,17 @@ if st.button('Calculate BMI'):
         else:
             st.error('You are obese.')
     else:
-        st.warning("Please enter your height in the format
+        st.warning("Please enter your height in the format 'feet'inches\", for example, 5'5\".")
+
+# BMI Chart as a table
+st.header('BMI Chart')
+bmi_chart_data = {
+    'BMI Category': ['Underweight', 'Normal weight', 'Overweight', 'Obese'],
+    'BMI Range': ['< 18.5', '18.5 - 24.9', '25.0 - 29.9', '>= 30.0'],
+    'Interpretation': ['You are underweight.', 'You have a normal weight.', 'You are overweight.', 'You are obese.']
+}
+st.table(bmi_chart_data)
+
+# Show the footer
+st.write('---')
+st.write('Created by Shir')

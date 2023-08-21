@@ -49,4 +49,4 @@ st.table(bmi_chart_data)
 
 # Show the footer
 st.write('---')
-st.write('Created by Shir')
+st.write('Created by Reishsier Abonita')

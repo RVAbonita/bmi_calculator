@@ -5,3 +5,4 @@ I'm thrilled to share the BMI Calculator App with you, a project sparked by my w
 #### Project Scope:
 The BMI Calculator App is designed to make it super simple for you to figure out your BMI. 
 Just tell it your height and weight, and it'll calculate your BMI and tell you if you're underweight, normal, overweight, or obese.
+
